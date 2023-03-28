@@ -50,9 +50,7 @@ export default {
     align-items: center;
     gap:3em;
 }
-.nav-item{
-   
-}
+
 .nav-search{
    
    
