@@ -1,6 +1,6 @@
 <template>
     <div class ="title">Anime recommendations</div>
-    <div class="list-container " v-dragscroll>
+    <div class="list-container "  v-dragscroll:nochilddrag>
       <div
         class="item md:container md:mx-auto"
         v-for="anime in animeList"
@@ -27,7 +27,9 @@
     },
   
     setup() {
-      console.log("hello");
+      
+      
+
       const animeList = ref([]);
       const animeResponse = ref([]);
       const error = ref(null);
@@ -66,10 +68,13 @@
           animeList.value.push(anime);
         });
       };
+
+
+
   
       load();
   
-      return { animeList };
+      return { animeList};
     },
   };
   </script>

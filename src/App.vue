@@ -1,4 +1,4 @@
-<template>
+<template >
 
   <HeaderView/>
   <router-view/>
