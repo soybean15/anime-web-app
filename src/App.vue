@@ -1,7 +1,14 @@
 <template >
+   <HeaderView/>
+    <div class=" mt-32" >
+  
+   
+ 
+      <router-view/>
+   
 
-  <HeaderView/>
-  <router-view/>
+</div>
+
 </template>
 
 <script>

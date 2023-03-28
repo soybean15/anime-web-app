@@ -2,25 +2,37 @@
   <div class="title">Popular</div>
   <div class="place-content-center">
     <swiper-container
-      class="mx-8"
+      class="flex h-40 sm:h-96 mx-1.5"
       ref="{swiperRef}"
       :slidesPerView="3"
       :centeredSlides="true"
+      :rewind="true" 
+      :spaceBetween="10"
       :autoplay="{
       delay: 2500,
       disableOnInteraction: false,
-    }"
-      :spaceBetween="50"
-      :pagination="{
-        type: 'fraction',
-      }"
-      :navigation="true"
+        }"
+      :breakpoints="{
+      1060: {
+        slidesPerView: 5,
+        spaceBetween:50
+      },
+      1190: {
+        slidesPerView: 4,
+        spaceBetween:10
+      },
+      1300: {
+        slidesPerView: 5,
+        spaceBetween:40
+      }
+        }"
+
 
     >
       <swiper-slide
         v-for="anime in animeList"
         :key="anime.mal_id"
-        class="slider h-96 w-64"
+        class="slider   w-full"
       >
         <PopularCard :anime="anime"/>
       </swiper-slide>
@@ -63,7 +75,7 @@ export default {
     const load = async () => {
       try {
         let data = await fetch(
-          "https://api.jikan.moe/v4/recommendations/anime"
+          "https://api.jikan.moe/v4/top/anime"
         );
         if (!data.ok) {
           throw Error("no Data available");
@@ -78,18 +90,23 @@ export default {
     };
 
     const mapResponse = (response) => {
-      console.log("size: " + response.value.data.length);
+      console.log("size from popular: " + response.value.data.length);
 
       response.value.data.forEach((res) => {
+        console.log(res.images.jpg.image_url)
         const anime = {
           mal_id: res.mal_id,
-          title: res.entry[0].title,
-          description: res.content,
+          title: res.title,
+          description:'',
           images: {
-            image_url: res.entry[0].images.jpg.image_url,
-            small_image_url: res.entry[0].images.jpg.small_image_url,
-            large_image_url: res.entry[0].images.jpg.large_image_url,
+            image_url: res.images.jpg.image_url,
+            small_image_url: res.images.jpg.small_image_url,
+            large_image_url: res.images.jpg.large_image_url,
+
           },
+          type: res.type,
+          episodes: res.episodes,
+          year: res.year
         };
         animeList.value.push(anime);
       });
@@ -116,6 +133,7 @@ export default {
   font-size: 1.2em;
 }
 .slider {
-  margin-bottom: 50px;
+  height: 90%;
 }
+
 </style>
