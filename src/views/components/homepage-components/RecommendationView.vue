@@ -97,7 +97,7 @@
     overflow: auto;
     overflow-x: hidden;
     margin:1em;
-    height: 18em;
+    
   }
   .container {
     background: blue;

@@ -10,6 +10,7 @@
     "@headlessui/vue": "^1.7.12",
     "@heroicons/vue": "^2.0.16",
     "core-js": "^3.8.3",
+    "swiper": "^9.1.1",
     "vue": "^3.2.13",
     "vue-dragscroll": "^4.0.5",
     "vue-router": "^4.0.3"
