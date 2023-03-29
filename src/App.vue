@@ -1,12 +1,10 @@
 <template >
-  <div :class="{'bg-slate-800':darkMode, 'bg-white':!darkMode } " >
-   <HeaderView/>
- 
+  <div :class="darkModeClass" >
+
+   <HeaderView @toggleDarkMode="toggleDarkMode" :darkMode="darkMode"/>
   
-   
- 
+
       <router-view/>
-      <button @click="toggleDarkMode">DarkMode</button>
    
 
 </div>
@@ -15,21 +13,36 @@
 
 <script>
 import { ref } from 'vue'
+
+
 import HeaderView from './views/components/Header.vue'
+
 export default{
   components :{ HeaderView },
   setup(){
     
     const darkMode = ref(false)
+    const darkModeClass = ref('light-mode')
+    const boxShadowColor = ref('rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px')
 
     const toggleDarkMode=()=>{
       darkMode.value = !darkMode.value
+      if(darkMode.value ){
+        darkModeClass.value = "dark-mode"
+        boxShadowColor.value =''
+      }else{
+        darkModeClass.value = "light-mode"
+        
+        boxShadowColor.value ='rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px'
+      }
       console.log( darkMode.value)
     }
 
     return {
       darkMode,
-      toggleDarkMode
+      toggleDarkMode,
+      darkModeClass,
+      boxShadowColor
     }
 
   }
@@ -45,9 +58,19 @@ export default{
   color: #2c3e50;
 
 }
-.dark{
-  background:black;
+.dark-mode{
+  background:rgb(27, 27, 27);
+  color: rgb(241 245 249);;
+  transition: background 1s;
 }
+.light-mode{
+  background:rgb(247, 247, 247);
+  color: rgb(30 41 59);
+
+  transition: background 1s;
+}
+
+
 
 nav {
   padding: 30px;
@@ -60,5 +83,18 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+
+  box-shadow: rgba(188, 188, 192, 0.575) 0px 7px 29px 0px;;
 }
+
+.box-shadow{
+ 
+  box-shadow: v-bind('boxShadowColor');
+}
+
+
+
+
+
+
 </style>

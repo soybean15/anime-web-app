@@ -3,7 +3,7 @@
          
           <img
             style="pointer-events: none"
-            class=" h-full w-full  popular-image object-cover rounded-2xl "
+            class=" h-full w-full  popular-image object-cover rounded-2xl   box-shadow"
             :src="anime.images.image_url"
             alt="Sunset in the mountains"
           />

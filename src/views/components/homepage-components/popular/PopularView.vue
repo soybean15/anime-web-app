@@ -1,5 +1,5 @@
 <template>
-  <div class="title">Popular</div>
+  <div class="title" :class="darkModeClass">Popular</div>
   <div class="place-content-center ">
     <swiper-container
       class="flex h-40 sm:h-96 mx-1.5  overflow-visible "
@@ -14,17 +14,18 @@
       disableOnInteraction: false,
         }"
       :breakpoints="{
-      1060: {
+              900: {
         initialSlide: 2,
+        slidesPerView:4,
+        spaceBetween:10
+      },
+
+      1190: {
         slidesPerView: 5,
         spaceBetween:10
       },
-      1190: {
-        slidesPerView: 2,
-        spaceBetween:10
-      },
       1300: {
-        initialSlide:2,
+        initialSlide:3,
         slidesPerView: 5,
         spaceBetween:10
       }

@@ -1,8 +1,8 @@
 <template>
     <div class="nav-container  top-0 left-0 right-0">
-        <img height="100px" class="nav-img" src="#">
+        <DarkmodeToggle @click="$emit('toggleDarkMode')" :darkMode="darkMode"/>
         <ul v-for="navItem in navItems" :key="navItem.name">
-        <router-link :to="{ name: navItem.route }" ><li class="nav-item">{{navItem.name}}</li></router-link>
+        <router-link :to="{ name: navItem.route }" ><li class="nav-item  text-red-800">{{navItem.name}}</li></router-link>
        
         </ul>
 
@@ -17,7 +17,11 @@
 
 <script>
 import { ref, watchEffect } from 'vue'
+import DarkmodeToggle from "../components/other/DarkModeToggle.vue"
 export default {
+    components:{DarkmodeToggle},
+    props:['darkMode'],
+    
     setup(){
         const isMobile =ref(false)
 
