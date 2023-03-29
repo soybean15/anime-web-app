@@ -1,10 +1,11 @@
 <template>
   <div class="title">Popular</div>
-  <div class="place-content-center">
+  <div class="place-content-center ">
     <swiper-container
-      class="flex h-40 sm:h-96 mx-1.5"
+      class="flex h-40 sm:h-96 mx-1.5  overflow-visible "
       ref="{swiperRef}"
       :slidesPerView="3"
+      :initialSlide= "1"
       :centeredSlides="true"
       :rewind="true" 
       :spaceBetween="10"
@@ -14,27 +15,35 @@
         }"
       :breakpoints="{
       1060: {
+        initialSlide: 2,
         slidesPerView: 5,
-        spaceBetween:50
+        spaceBetween:10
       },
       1190: {
-        slidesPerView: 4,
+        slidesPerView: 2,
         spaceBetween:10
       },
       1300: {
+        initialSlide:2,
         slidesPerView: 5,
-        spaceBetween:40
+        spaceBetween:10
       }
         }"
+        :onProgress = "onProgress"
+        :effect="fade"
+        :slideToClickedSlide = "true"
+ 
+      
+     
 
 
     >
       <swiper-slide
-        v-for="anime in animeList"
+        v-for="(anime) in animeList"
         :key="anime.mal_id"
-        class="slider   w-full"
+        class="slider w-full"
       >
-        <PopularCard :anime="anime"/>
+        <PopularCard :anime="anime" />
       </swiper-slide>
     </swiper-container>
   </div>
@@ -42,7 +51,7 @@
   
   <script>
 import { register } from "swiper/element/bundle";
-import { ref } from "vue";
+import { ref, onUpdated,watch} from "vue";
 import PopularCard from "./PopularCard.vue";
 import getPopular from "../../../../data/jikan-api/getPopular"
 
@@ -60,17 +69,33 @@ export default {
     PopularCard,
   },
   setup() {
+    const animeList = getPopular()
+    
+    
+    const activeIndex = ref(null)
+ 
     const spaceBetween = 0;
     const onProgress = (e) => {
       const [swiper, progress] = e.detail;
-      console.log(progress);
+      console.log(swiper.activeIndex)
+      activeIndex.value =swiper.activeIndex
+      
     };
 
     const onSlideChange = (e) => {
-      console.log("slide changed");
+      const [swiper, progress] = e.detail;
+      
+     
+      console.log(swiper.activeIndex);
     };
 
-    const {animeList }= getPopular()
+
+
+      onUpdated(() => {
+        // text content should be the same as current `count.value`
+       
+      })
+
 
 
 
@@ -78,7 +103,8 @@ export default {
       spaceBetween,
       onProgress,
       onSlideChange,
-      animeList
+      animeList,
+      activeIndex
      
     };
   },
@@ -95,5 +121,20 @@ export default {
 .slider {
   height: 90%;
 }
-
+.swiper-slide-active{
+  transform: scale(1);
+  transition: all 0.5s ease-in-out;
+}
+swiper-slide:not(.swiper-slide-active) {
+  transform: scale(.9);
+  transition: all 0.5s ease-in-out;
+}
+/* .swiper-slide-next {
+  transform: scale(.9);
+  transition: all 0.5s ease-in-out;
+}
+.swiper-slide-prev {
+  transform: scale(.9);
+  transition: all 0.5s ease-in-out;
+} */
 </style>

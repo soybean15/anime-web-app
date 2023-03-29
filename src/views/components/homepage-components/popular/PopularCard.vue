@@ -1,5 +1,6 @@
 <template>
-        <div class="relative h-full w-full shadow-lg  rounded-2xl  ">
+        <div class="relative h-full w-full shadow-lg  rounded-2xl scale-100 hover:scale-105 ">
+         
           <img
             style="pointer-events: none"
             class=" h-full w-full  popular-image object-cover rounded-2xl "
@@ -24,10 +25,12 @@
 </template>
 
 <script>
+
 export default {
     props:['anime'],
-    setup(){
+    setup(props){
 
+   
     }
 
 }

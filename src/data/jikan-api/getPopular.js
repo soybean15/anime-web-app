@@ -38,7 +38,7 @@ const getPopular = ()=>{
       };
 
     
-      return {animeList}
+      return animeList
 
 
 }
