@@ -1,10 +1,12 @@
 <template >
+  <div :class="{'bg-slate-800':darkMode, 'bg-white':!darkMode } " >
    <HeaderView/>
-    <div class=" mt-32" >
+ 
   
    
  
       <router-view/>
+      <button @click="toggleDarkMode">DarkMode</button>
    
 
 </div>
@@ -12,9 +14,25 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 import HeaderView from './views/components/Header.vue'
 export default{
-  components :{ HeaderView }
+  components :{ HeaderView },
+  setup(){
+    
+    const darkMode = ref(false)
+
+    const toggleDarkMode=()=>{
+      darkMode.value = !darkMode.value
+      console.log( darkMode.value)
+    }
+
+    return {
+      darkMode,
+      toggleDarkMode
+    }
+
+  }
 
 }
 </script>
@@ -25,6 +43,10 @@ export default{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+}
+.dark{
+  background:black;
 }
 
 nav {

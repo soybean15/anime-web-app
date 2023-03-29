@@ -1,5 +1,5 @@
 <template>
-    <div class="nav-container bg-white fixed top-0 left-0 right-0">
+    <div class="nav-container  top-0 left-0 right-0">
         <img height="100px" class="nav-img" src="#">
         <ul v-for="navItem in navItems" :key="navItem.name">
         <router-link :to="{ name: navItem.route }" ><li class="nav-item">{{navItem.name}}</li></router-link>
