@@ -6,7 +6,7 @@
 
 <script>
 
-import RecommendationView from '../views/components/homepage-components/RecommendationView.vue'
+import RecommendationView from '../views/components/homepage-components/recommendation/RecommendationView.vue'
 import PopularView from '../views/components/homepage-components/popular/PopularView.vue'
 // @ is an alias to /src
 

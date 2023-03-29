@@ -44,11 +44,13 @@
 import { register } from "swiper/element/bundle";
 import { ref } from "vue";
 import PopularCard from "./PopularCard.vue";
+import getPopular from "../../../../data/jikan-api/getPopular"
 
 import "swiper/css";
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
 
 
 register();
@@ -68,51 +70,9 @@ export default {
       console.log("slide changed");
     };
 
-    const animeList = ref([]);
-    const animeResponse = ref([]);
-    const error = ref(null);
+    const {animeList }= getPopular()
 
-    const load = async () => {
-      try {
-        let data = await fetch(
-          "https://api.jikan.moe/v4/top/anime"
-        );
-        if (!data.ok) {
-          throw Error("no Data available");
-        }
 
-        animeResponse.value = await data.json();
-
-        mapResponse(animeResponse);
-      } catch (err) {
-        error.value = err.message;
-      }
-    };
-
-    const mapResponse = (response) => {
-      console.log("size from popular: " + response.value.data.length);
-
-      response.value.data.forEach((res) => {
-        console.log(res.images.jpg.image_url)
-        const anime = {
-          mal_id: res.mal_id,
-          title: res.title,
-          description:'',
-          images: {
-            image_url: res.images.jpg.image_url,
-            small_image_url: res.images.jpg.small_image_url,
-            large_image_url: res.images.jpg.large_image_url,
-
-          },
-          type: res.type,
-          episodes: res.episodes,
-          year: res.year
-        };
-        animeList.value.push(anime);
-      });
-    };
-
-    load();
 
     return {
       spaceBetween,

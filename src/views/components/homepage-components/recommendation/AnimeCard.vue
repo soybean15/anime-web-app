@@ -17,7 +17,7 @@
 
 <script>
 import { dragscroll } from "vue-dragscroll";
-import { computed, watch } from "vue";
+import { computed } from "vue";
 export default {
   directives: {
     dragscroll,
