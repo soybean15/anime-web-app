@@ -1,5 +1,5 @@
 <template>
-        <div class="relative h-full w-full shadow-lg  rounded-2xl scale-100 hover:scale-105 ">
+        <div class="relative h-full  shadow-lg  rounded-2xl scale-100 hover:scale-105 ">
          
           <img
             style="pointer-events: none"

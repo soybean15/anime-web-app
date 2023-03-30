@@ -28,7 +28,7 @@ export default{
     console.log(darkMode.value)
     const darkModeClass = ref(darkMode.value==true ? 'dark-mode': 'light-mode')
     const boxShadowColor = ref('rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px')
-    console.log(darkModeClass.value)
+
     const toggleDarkMode=()=>{
       darkMode.value = !darkMode.value
       localStorage.setItem('darkMode',darkMode.value);
@@ -77,6 +77,13 @@ body{
   color: rgb(30 41 59);
 
   transition: background 1s;
+}
+.dark-mode .active-button{
+  color: rgb(12, 167, 12);
+}
+
+.light-mode .active-button{
+  color: #72A0C1;
 }
 
 

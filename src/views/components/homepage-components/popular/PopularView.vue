@@ -1,153 +1,147 @@
 <template>
-  <div class="flex title" >
+  <div class="flex title">
     <div class="flex-none">
       Popular
-      <button @click="onSwitchContent">
-        <div v-if="onAnime">Anime</div>
-        <div v-else>Manga</div>
-      </button>
+    
     </div>
     <div class="grow"></div>
-    <div class="flex-none">View all</div>
+    <div class="flex-none">
+
+      <button :class="{'active-button':isAnimeActive}" @click="onAnime">
+        <div>Anime</div>
+      </button>
+     |
+      <button  :class="{'active-button':!isAnimeActive}" @click="onManga">
+        <div>Manga</div>
+     
+      </button>
+    </div>
   </div>
-  <div class="place-content-center ">
-    <swiper-container
-      class="flex h-40 sm:h-96 mx-1.5  overflow-visible "
+
+
+
+  <div class="place-content-center">
+
+      <swiper-container
+      class="flex h-40 sm:h-96 mx-1.5 overflow-visible"
       ref="{swiperRef}"
       :slidesPerView="3"
-      :initialSlide= "1"
+      :initialSlide="1"
       :centeredSlides="true"
-      :rewind="true" 
+      :rewind="true"
       :spaceBetween="10"
       :autoplay="{
-      delay: 2500,
-      disableOnInteraction: false,
-        }"
+        delay: 2500,
+        disableOnInteraction: false,
+      }"
       :breakpoints="{
-              900: {
-        initialSlide: 2,
-        slidesPerView:4,
-        spaceBetween:10
-      },
+        900: {
+          initialSlide: 2,
+          slidesPerView: 4,
+          spaceBetween: 10,
+        },
 
-      1190: {
-        slidesPerView: 5,
-        spaceBetween:10
-      },
-      1300: {
-        initialSlide:3,
-        slidesPerView: 5,
-        spaceBetween:10
-      }
-        }"
-        :onProgress = "onProgress"
-        :effect="fade"
-        :slideToClickedSlide = "true"
- 
-      
-     
-
-
+        1190: {
+          slidesPerView: 5,
+          spaceBetween: 10,
+        },
+        1300: {
+          initialSlide: 3,
+          slidesPerView: 5,
+          spaceBetween: 10,
+        },
+      }"
+      :onProgress="onProgress"
+      :effect="fade"
+      :slideToClickedSlide="true"
     >
+
       <swiper-slide
         v-for="item in state.items"
         :key="item.mal_id"
         class="slider"
-    >
-
-    <PopularCard :item="item" />
-   
+      >
+        <PopularCard :item="item" />
       </swiper-slide>
     </swiper-container>
+
+    
+
   </div>
 </template>
   
   <script>
 import { register } from "swiper/element/bundle";
-import { ref, onUpdated,reactive,watchEffect,onMounted, onCreated} from "vue";
+import {
+  ref,
+  onUpdated,
+  reactive,
+
+} from "vue";
 import PopularCard from "./PopularCard.vue";
-import getPopular from "../../../../data/jikan-api/getPopular"
-import getPopularManga from "../../../../data/jikan-api/getPopularManga"
+
+import getPopular from "../../../../data/jikan-api/getPopular";
+import getPopularManga from "../../../../data/jikan-api/getPopularManga";
 
 import "swiper/css";
 
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-
-
 register();
 
 export default {
   components: {
     PopularCard,
+    
   },
   setup() {
+    //  let itemList = ref()  //this returns ref([])//reactive
+    
+    let state = reactive({ items: getPopular() });
+
+    const activeIndex = ref(null);
+    const spaceBetween = 0;
+    const isAnimeActive = ref(true)
 
 
-  //  let itemList = ref()  //this returns ref([])//reactive 
-    const onAnime = ref(true)
-    let state= reactive({items: getPopular()});
-   
-    console.log(state.items)
-   
-    const onSwitchContent = ()=>{
-      onAnime.value = !onAnime.value
-      if(onAnime.value){
-        //itemList.value = getPopular()  
-        state.items = getPopular()  
-       }else{
-        //itemList.value = getPopularManga()  
-        state.items = getPopularManga()  
-       
-       }
-          
-        // console.log(itemList)
 
+
+    const onManga = ()=>{
+      state.items = getPopularManga();
+      isAnimeActive.value = false
+    }
+    const onAnime = ()=>{
+      state.items = getPopular();
+      isAnimeActive.value = true
     }
 
-
-    
-    
-    const activeIndex = ref(null)
- 
-    const spaceBetween = 0;
    
-
     const onProgress = (e) => {
       const [swiper, progress] = e.detail;
-   
-      activeIndex.value =swiper.activeIndex
-      
+
+      activeIndex.value = swiper.activeIndex;
     };
 
     const onSlideChange = (e) => {
       const [swiper, progress] = e.detail;
-      
-     
+
       console.log(swiper.activeIndex);
     };
 
-
-
-      onUpdated(() => {
-        // text content should be the same as current `count.value`
-       
-      })
- 
-
-
-
+    onUpdated(() => {
+      // text content should be the same as current `count.value`
+    });
 
     return {
       spaceBetween,
       onProgress,
       onSlideChange,
       activeIndex,
-      onSwitchContent,
-      onAnime,state
-
-     
+      onAnime,
+      onManga,
+      isAnimeActive,
+      state,
     };
   },
 };
@@ -160,16 +154,17 @@ export default {
   font-weight: bold;
   font-size: 1.2em;
 }
-.slider {
-  height: 90%;
-}
-.swiper-slide-active{
+
+.swiper-slide-active {
   transform: scale(1);
-  transition: all 0.5s ease-in-out;
+
 }
 swiper-slide:not(.swiper-slide-active) {
-  transform: scale(.9);
-  transition: all 0.5s ease-in-out;
+  transform: scale(0.9);
+
+}
+.active-button{
+  
 }
 /* .swiper-slide-next {
   transform: scale(.9);
