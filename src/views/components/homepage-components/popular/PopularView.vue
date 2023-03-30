@@ -1,5 +1,12 @@
 <template>
-  <div class="title" :class="darkModeClass">Popular</div>
+  <div class="flex title" >
+    <div class="flex-none">
+      Popular
+      <button>Anime</button>
+    </div>
+    <div class="grow"></div>
+    <div class="flex-none">View all</div>
+  </div>
   <div class="place-content-center ">
     <swiper-container
       class="flex h-40 sm:h-96 mx-1.5  overflow-visible "
