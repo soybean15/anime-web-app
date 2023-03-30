@@ -20,22 +20,28 @@ import HeaderView from './views/components/Header.vue'
 export default{
   components :{ HeaderView },
   setup(){
-    
-    const darkMode = ref(false)
-    const darkModeClass = ref('light-mode')
-    const boxShadowColor = ref('rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px')
 
+    const dm = localStorage.getItem('darkMode');
+    
+    const darkMode = ref(dm=='true')
+    console.log(dm)
+    console.log(darkMode.value)
+    const darkModeClass = ref(darkMode.value==true ? 'dark-mode': 'light-mode')
+    const boxShadowColor = ref('rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px')
+    console.log(darkModeClass.value)
     const toggleDarkMode=()=>{
       darkMode.value = !darkMode.value
+      localStorage.setItem('darkMode',darkMode.value);
       if(darkMode.value ){
+
+        
         darkModeClass.value = "dark-mode"
         boxShadowColor.value =''
       }else{
         darkModeClass.value = "light-mode"
-        
         boxShadowColor.value ='rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px'
       }
-      console.log( darkMode.value)
+     
     }
 
     return {
