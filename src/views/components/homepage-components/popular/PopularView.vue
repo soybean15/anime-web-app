@@ -2,7 +2,10 @@
   <div class="flex title" >
     <div class="flex-none">
       Popular
-      <button>Anime</button>
+      <button @click="onSwitchContent">
+        <div v-if="onAnime">Anime</div>
+        <div v-else>Manga</div>
+      </button>
     </div>
     <div class="grow"></div>
     <div class="flex-none">View all</div>
@@ -47,11 +50,13 @@
 
     >
       <swiper-slide
-        v-for="(anime) in animeList"
-        :key="anime.mal_id"
-        class="slider w-full"
-      >
-        <PopularCard :anime="anime" />
+        v-for="item in state.items"
+        :key="item.mal_id"
+        class="slider"
+    >
+
+    <PopularCard :item="item" />
+   
       </swiper-slide>
     </swiper-container>
   </div>
@@ -59,9 +64,10 @@
   
   <script>
 import { register } from "swiper/element/bundle";
-import { ref, onUpdated,watch} from "vue";
+import { ref, onUpdated,reactive,watchEffect,onMounted, onCreated} from "vue";
 import PopularCard from "./PopularCard.vue";
 import getPopular from "../../../../data/jikan-api/getPopular"
+import getPopularManga from "../../../../data/jikan-api/getPopularManga"
 
 import "swiper/css";
 
@@ -77,15 +83,40 @@ export default {
     PopularCard,
   },
   setup() {
-    const animeList = getPopular()
+
+
+  //  let itemList = ref()  //this returns ref([])//reactive 
+    const onAnime = ref(true)
+    let state= reactive({items: getPopular()});
+   
+    console.log(state.items)
+   
+    const onSwitchContent = ()=>{
+      onAnime.value = !onAnime.value
+      if(onAnime.value){
+        //itemList.value = getPopular()  
+        state.items = getPopular()  
+       }else{
+        //itemList.value = getPopularManga()  
+        state.items = getPopularManga()  
+       
+       }
+          
+        // console.log(itemList)
+
+    }
+
+
     
     
     const activeIndex = ref(null)
  
     const spaceBetween = 0;
+   
+
     const onProgress = (e) => {
       const [swiper, progress] = e.detail;
-      console.log(swiper.activeIndex)
+   
       activeIndex.value =swiper.activeIndex
       
     };
@@ -103,6 +134,7 @@ export default {
         // text content should be the same as current `count.value`
        
       })
+ 
 
 
 
@@ -111,8 +143,10 @@ export default {
       spaceBetween,
       onProgress,
       onSlideChange,
-      animeList,
-      activeIndex
+      activeIndex,
+      onSwitchContent,
+      onAnime,state
+
      
     };
   },

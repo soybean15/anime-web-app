@@ -30,10 +30,15 @@ const getPopularManga = ()=>{
   
             },
             type: res.type,
-            episodes: res.episodes,
-            year: res.year
+         
+            details:{
+                info_content :res.chapters,
+                info_type: "Chapters"
+              } ,
+            year: res.published.prop.from.year+"-"+res.published.prop.to.year
           };
           mangaList.value.push(manga);
+     
         });
       };
 

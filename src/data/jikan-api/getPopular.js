@@ -30,10 +30,14 @@ const getPopular = ()=>{
   
             },
             type: res.type,
-            episodes: res.episodes,
+            details:{
+              info_content :res.episodes,
+              info_type: "Episode"
+            } ,
             year: res.year
           };
           animeList.value.push(anime);
+        
         });
       };
 
