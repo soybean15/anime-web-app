@@ -108,13 +108,13 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #cdd1d6;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #b8ae25;
 
-  box-shadow: rgba(188, 188, 192, 0.575) 0px 7px 29px 0px;;
+  /* box-shadow: rgba(188, 188, 192, 0.575) 0px 7px 29px 0px;; */
 }
 
 .box-shadow{

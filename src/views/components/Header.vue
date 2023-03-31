@@ -2,9 +2,10 @@
 
 
 
-    <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
+    <nav class="flex items-center justify-between flex-wrap bg-gray-800 p-6">
   <div class="flex items-center flex-shrink-0 text-white mr-6">
-    
+    <div class="mr-4"> <DarkmodeToggle @click="$emit('toggleDarkMode')" :darkMode="darkMode"/></div>
+   
     <span class="font-semibold text-xl tracking-tight">AniMING</span>
   </div>
   <div class="block lg:hidden">
@@ -14,12 +15,11 @@
   </div>
   <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
     <div class="text-sm lg:flex-grow" v-for="navItem in navItems" :key="navItem.name">
-        <router-link :to="{ name: navItem.route }" ><li class="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">{{navItem.name}}</li></router-link>
+        <router-link :to="{ name: navItem.route }" ><li class="block text-center mt-4 lg:inline-block lg:mt-0 hover:text-white mr-4">{{navItem.name}}</li></router-link>
      
     </div>
-    <div>
-      <a href="#" class="inline-block text-sm px-4 py-2 mt-4 lg:mt-0"> <DarkmodeToggle @click="$emit('toggleDarkMode')" :darkMode="darkMode"/></a>
-    </div>
+
+
   </div>
 </nav>
 
@@ -32,19 +32,7 @@
 
 
 
-    <div class="nav-container  top-0 left-0 right-0">
-       
-        <ul v-for="navItem in navItems" :key="navItem.name">
-        <router-link :to="{ name: navItem.route }" ><li class="nav-item  text-red-800">{{navItem.name}}</li></router-link>
-       
-        </ul>
 
-        <div class="nav-search">
-            <div class="nav-search-label">Search</div>
-            <div class="nav-search-input"><input type="" placeholder="Search"></div>
-        </div>
-        
-    </div>
   
 </template>
 
