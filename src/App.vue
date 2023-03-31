@@ -68,13 +68,13 @@ body{
 
 }
 .dark-mode{
-  background:rgb(27, 27, 27);
+  background:#171917;
   color: rgb(241 245 249);;
   transition: background 1s;
 }
 .light-mode{
   background:rgb(247, 247, 247);
-  color: rgb(30 41 59);
+  color: rgb(32, 32, 32);
 
   transition: background 1s;
 }
@@ -83,8 +83,22 @@ body{
 }
 
 .light-mode .active-button{
+  
   color: #72A0C1;
 }
+
+
+.dark-mode .on-surface{
+  background-color: 	#1e1e1e;
+  color:#dce1e3;
+  
+}
+
+.light-mode .on-surface{
+  background-color: 	#f2f2f2 ;
+  color: #383838;
+}
+
 
 
 

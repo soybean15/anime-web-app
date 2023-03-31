@@ -80,7 +80,7 @@ import {
 } from "vue";
 import PopularCard from "./PopularCard.vue";
 
-import getPopular from "../../../../data/jikan-api/getPopular";
+import getPopular from "@/data/jikan-api/getPopular";
 import getPopularManga from "../../../../data/jikan-api/getPopularManga";
 
 import "swiper/css";
