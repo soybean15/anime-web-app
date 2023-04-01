@@ -10,7 +10,7 @@
     <div class="block " :class="{'hidden':!isMobile}">
       <button
         @click="hideShowNav"
-        class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
+        class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white"
       >
         <svg
           class="fill-current h-3 w-3"
@@ -53,7 +53,7 @@ export default {
   props: ["darkMode"],
 
   setup() {
-    const isMobile = ref(false);
+    const isMobile = ref(window.innerWidth < 1024);
     const navHidden = ref(true)
 
     const navItems = ref([
@@ -66,6 +66,7 @@ export default {
     window.addEventListener("resize", function () {
       isMobile.value = window.innerWidth < 1024;
       navHidden.value=true
+      console.log("Opneing")
     });
 
     const hideShowNav = ()=>{
