@@ -54,6 +54,7 @@
       :onProgress="onProgress"
       :effect="fade"
       :slideToClickedSlide="true"
+      :loading="lazy"
     >
 
       <swiper-slide
