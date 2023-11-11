@@ -1,2 +1,0 @@
-"use strict";(self["webpackChunkaniming"]=self["webpackChunkaniming"]||[]).push([[443],{7381:function(n,a,u){u.r(a),u.d(a,{default:function(){return l}});var i=u(3396);const t={class:"about"},e=(0,i._)("h1",null,"This is an about page",-1),r=[e];function s(n,a){return(0,i.wg)(),(0,i.iD)("div",t,r)}var c=u(89);const o={},f=(0,c.Z)(o,[["render",s]]);var l=f}}]);
-//# sourceMappingURL=about.afc48511.js.map
